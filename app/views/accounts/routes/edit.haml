@@ -1,0 +1,4 @@
+= simple_form_for :route, method: :patch, url: account_route_path(@account, @route) do |f|
+  = f.input :name, as: :string
+  = f.input :path, as: :string
+  = f.button :submit, 'Save'

@@ -1,0 +1,5 @@
+= link_to 'New', new_account_route_path(@account)
+
+%ul
+  - @routes.each do |route|
+    %li=link_to route.name, account_route_path(@account, route)

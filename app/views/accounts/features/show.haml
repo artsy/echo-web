@@ -1,0 +1,3 @@
+%h2= @feature.name
+= link_to 'Edit', edit_account_feature_path(@account, @feature)
+= link_to 'Delete', account_feature_path(@account, @feature), method: :delete, data: { confirm: "Are you sure?" }

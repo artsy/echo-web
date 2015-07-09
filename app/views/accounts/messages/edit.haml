@@ -1,0 +1,4 @@
+= simple_form_for :message, method: :patch, url: account_message_path(@account, @message) do |f|
+  = f.input :name, as: :string
+  = f.input :content, as: :string
+  = f.button :submit, 'Save'

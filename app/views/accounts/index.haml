@@ -1,0 +1,5 @@
+= link_to 'New', new_account_path
+
+%ul
+  - @accounts.each do |account|
+    %li=link_to account.name, account_path(account)
