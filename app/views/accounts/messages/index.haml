@@ -1,0 +1,5 @@
+= link_to 'New', new_account_message_path(@account)
+
+%ul
+  - @messages.each do |message|
+    %li=link_to message.name, account_message_path(@account, message)

@@ -1,0 +1,5 @@
+= link_to 'New', new_account_feature_path(@account)
+
+%ul
+  - @features.each do |feature|
+    %li=link_to feature.name, account_feature_path(@account, feature)

@@ -1,0 +1,4 @@
+= simple_form_for :feature, url: account_features_path(@account) do |f|
+  = f.input :name, as: :string
+  = f.input :value, as: :string
+  = f.button :submit, 'Save'

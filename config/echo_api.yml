@@ -1,0 +1,8 @@
+development: &default
+  url: <%= ENV['ECHO_API_URL'] %>
+  token: <%= ENV['ECHO_API_TOKEN'] %>
+test:
+  url: http://api.example.com
+  token: replace-me
+production:
+  <<: *default
