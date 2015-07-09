@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'accounts/index.html.erb', type: :view do
-  context 'anonymous user' do
+  context 'logged in user' do
+    include_context 'logged in user'
+
     let(:account) { Fabricate(:account) }
     let(:accounts) { [account] }
     let(:collection_response) { hypermedia_collection_json_for accounts }

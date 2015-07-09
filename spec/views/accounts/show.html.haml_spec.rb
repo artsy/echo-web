@@ -10,7 +10,8 @@ RSpec.describe 'accounts/show.html.erb', type: :view do
       .to_return(status: 200, body: resource_response)
   end
 
-  context 'anonymous user' do
+  context 'logged in user' do
+    include_context 'logged in user'
     before do
       root_request
       resource_find_request
