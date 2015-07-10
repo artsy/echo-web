@@ -1,17 +1,40 @@
 require 'rails_helper'
 
 RSpec.describe AccountsController, type: :controller do
-  let(:account) { Fabricate(:account) }
-  let(:resource_response) { hypermedia_resource_json_for account }
-  let(:resource_find_request) do
-    uri = Regexp.new "#{Account.api_root}/accounts/#{account.id}"
-    WebMock.stub_request(:get, uri)
-      .with(headers: { 'Http-Authorization' => Account.api_token })
-      .to_return(status: 200, body: resource_response)
+  context 'anonymous user' do
+    it 'responds with a 401 status to GET requests' do
+      [:index, :new, :edit, :show].each do |action|
+        get action, id: 123
+        expect(response.status).to be 401
+      end
+    end
+    it 'responds with a 401 status to POST requests' do
+      post :create
+      expect(response.status).to be 401
+    end
+    it 'responds with a 401 status to PATCH requests' do
+      patch :update, id: 123
+      expect(response.status).to be 401
+    end
+    it 'responds with a 401 status to DELETE requests' do
+      delete :destroy, id: 123
+      expect(response.status).to be 401
+    end
   end
 
-  describe "GET 'index'" do
-    context 'anonymous user' do
+  context 'logged in user' do
+    include_context 'logged in user'
+
+    let(:account) { Fabricate(:account) }
+    let(:resource_response) { hypermedia_resource_json_for account }
+    let(:resource_find_request) do
+      uri = Regexp.new "#{Account.api_root}/accounts/#{account.id}"
+      WebMock.stub_request(:get, uri)
+        .with(headers: { 'Http-Authorization' => Account.api_token })
+        .to_return(status: 200, body: resource_response)
+    end
+
+    describe "GET 'index'" do
       let(:accounts) { [account] }
       let(:collection_response) { hypermedia_collection_json_for accounts }
       let(:collection_request) do
@@ -60,26 +83,21 @@ RSpec.describe AccountsController, type: :controller do
         expect(assigns(:accounts).first.name).to eq account.name
       end
     end
-  end
-  describe "GET 'new'" do
-    context 'anonymous user' do
+    describe "GET 'new'" do
       it 'renders the new template' do
         get :new
         expect(response.status).to be 200
         expect(response).to render_template('new')
       end
     end
-  end
 
-  describe "POST 'create'" do
-    let(:resource_create_request) do
-      uri = Regexp.new "#{Account.api_root}/accounts"
-      WebMock.stub_request(:post, uri)
-        .with(headers: { 'Http-Authorization' => Account.api_token })
-        .to_return(status: 200, body: resource_response)
-    end
-
-    context 'anonymous user' do
+    context "POST 'create'"  do
+      let(:resource_create_request) do
+        uri = Regexp.new "#{Account.api_root}/accounts"
+        WebMock.stub_request(:post, uri)
+          .with(headers: { 'Http-Authorization' => Account.api_token })
+          .to_return(status: 200, body: resource_response)
+      end
       before do
         root_request
         resource_create_request
@@ -99,10 +117,8 @@ RSpec.describe AccountsController, type: :controller do
         expect(resource_create_request.with(body: body_str)).to have_been_requested
       end
     end
-  end
 
-  describe "GET 'show'" do
-    context 'anonymous user' do
+    describe "GET 'show'" do
       before do
         root_request
         resource_find_request
@@ -121,10 +137,8 @@ RSpec.describe AccountsController, type: :controller do
         expect(assigns(:account).name).to eq account.name
       end
     end
-  end
 
-  describe "GET 'edit'" do
-    context 'anonymous user' do
+    describe "GET 'edit'" do
       before do
         root_request
         resource_find_request
@@ -140,17 +154,15 @@ RSpec.describe AccountsController, type: :controller do
         expect(assigns(:account).name).to eq account.name
       end
     end
-  end
 
-  describe "PATCH 'update'" do
-    let(:resource_update_request) do
-      uri = Regexp.new "#{Account.api_root}/accounts/#{account.id}"
-      WebMock.stub_request(:patch, uri)
-        .with(headers: { 'Http-Authorization' => Account.api_token })
-        .to_return(status: 200, body: resource_response)
-    end
+    describe "PATCH 'update'" do
+      let(:resource_update_request) do
+        uri = Regexp.new "#{Account.api_root}/accounts/#{account.id}"
+        WebMock.stub_request(:patch, uri)
+          .with(headers: { 'Http-Authorization' => Account.api_token })
+          .to_return(status: 200, body: resource_response)
+      end
 
-    context 'anonymous user' do
       before do
         root_request
         resource_find_request
@@ -173,17 +185,14 @@ RSpec.describe AccountsController, type: :controller do
         expect(resource_find_request).to have_been_requested
       end
     end
-  end
 
-  describe "DELETE 'destroy'" do
-    let(:resource_delete_request) do
-      uri = Regexp.new "#{Account.api_root}/accounts/#{account.id}"
-      WebMock.stub_request(:delete, uri)
-        .with(headers: { 'Http-Authorization' => Account.api_token })
-        .to_return(status: 200, body: resource_response)
-    end
-
-    context 'anonymous user' do
+    describe "DELETE 'destroy'" do
+      let(:resource_delete_request) do
+        uri = Regexp.new "#{Account.api_root}/accounts/#{account.id}"
+        WebMock.stub_request(:delete, uri)
+          .with(headers: { 'Http-Authorization' => Account.api_token })
+          .to_return(status: 200, body: resource_response)
+      end
       before do
         root_request
         resource_find_request

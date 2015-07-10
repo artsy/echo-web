@@ -19,7 +19,8 @@ RSpec.describe 'accounts/features/new.html.erb', type: :view do
       .to_return(status: 200, body: feature_response)
   end
 
-  context 'anonymous user' do
+  context 'logged in user' do
+    include_context 'logged in user'
     before do
       root_request
       account_find_request
