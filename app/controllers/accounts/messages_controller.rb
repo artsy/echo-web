@@ -13,7 +13,7 @@ module Accounts
 
     def create
       @message = Message.create message_params
-      redirect_to account_message_path @account, @message
+      redirect_to account_message_path(@account, @message), notice: t('flash.notice.success.create', class_name: 'Message')
     end
 
     def show
@@ -24,12 +24,12 @@ module Accounts
 
     def update
       @message = @message.save message_params
-      redirect_to account_message_path @account, @message
+      redirect_to account_message_path(@account, @message), notice: t('flash.notice.success.update', class_name: 'Message')
     end
 
     def destroy
       @message.destroy
-      redirect_to account_messages_path @account
+      redirect_to account_messages_path(@account), notice: t('flash.notice.success.update', class_name: 'Message')
     end
 
     private

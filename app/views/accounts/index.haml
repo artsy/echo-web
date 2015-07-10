@@ -1,4 +1,8 @@
-= link_to 'New', new_account_path
+- content_for :title do
+  = t('.title')
+
+%p
+  = link_to t('actions.new'), new_account_path
 
 %ul
   - @accounts.each do |account|

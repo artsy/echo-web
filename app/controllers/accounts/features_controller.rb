@@ -13,7 +13,7 @@ module Accounts
 
     def create
       @feature = Feature.create feature_params
-      redirect_to account_feature_path @account, @feature
+      redirect_to account_feature_path(@account, @feature), notice: t('flash.notice.success.create', class_name: 'Feature')
     end
 
     def show
@@ -24,12 +24,12 @@ module Accounts
 
     def update
       @feature = @feature.save feature_params
-      redirect_to account_feature_path @account, @feature
+      redirect_to account_feature_path(@account, @feature), notice: t('flash.notice.success.update', class_name: 'Feature')
     end
 
     def destroy
       @feature.destroy
-      redirect_to account_features_path @account
+      redirect_to account_features_path(@account), notice: t('flash.notice.success.update', class_name: 'Feature')
     end
 
     private

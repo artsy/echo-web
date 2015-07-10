@@ -1,3 +1,5 @@
-%h2= @feature.name
-= link_to 'Edit', edit_account_feature_path(@account, @feature)
-= link_to 'Delete', account_feature_path(@account, @feature), method: :delete, data: { confirm: "Are you sure?" }
+= render partial: '/accounts/section_nav', locals: { account: @account }
+
+%p= @feature.name
+= link_to t('actions.edit'), edit_account_feature_path(@account, @feature)
+= link_to t('actions.delete'), account_feature_path(@account, @feature), method: :delete, data: { confirm: "Are you sure?" }

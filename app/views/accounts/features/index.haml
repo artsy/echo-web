@@ -1,4 +1,6 @@
-= link_to 'New', new_account_feature_path(@account)
+= render partial: '/accounts/section_nav', locals: { account: @account }
+
+= link_to t('actions.new'), new_account_feature_path(@account)
 
 %ul
   - @features.each do |feature|

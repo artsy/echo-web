@@ -1,0 +1,8 @@
+en:
+  accounts:
+    index:
+      title: Accounts
+    new:
+      title: New Account
+    section_nav:
+      title: Account

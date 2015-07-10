@@ -13,7 +13,7 @@ module Accounts
 
     def create
       @route = Route.create route_params
-      redirect_to account_route_path @account, @route
+      redirect_to account_route_path(@account, @route), notice: t('flash.notice.success.create', class_name: 'Route')
     end
 
     def show
@@ -24,12 +24,12 @@ module Accounts
 
     def update
       @route = @route.save route_params
-      redirect_to account_route_path @account, @route
+      redirect_to account_route_path(@account, @route), notice: t('flash.notice.success.update', class_name: 'Route')
     end
 
     def destroy
       @route.destroy
-      redirect_to account_routes_path @account
+      redirect_to account_routes_path(@account), notice: t('flash.notice.success.update', class_name: 'Route')
     end
 
     private

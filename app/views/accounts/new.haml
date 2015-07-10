@@ -1,3 +1,6 @@
+- content_for :title do
+  = t('.title')
+
 = simple_form_for :account, url: accounts_path do |f|
   = f.input :name, as: :string
-  = f.button :submit, 'Save'
+  = f.button :submit, t('forms.save')

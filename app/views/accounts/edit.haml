@@ -1,3 +1,5 @@
+= render partial: 'section_nav', locals: { account: @account }
+
 = simple_form_for :account, method: :patch, url: account_path(@account) do |f|
   = f.input :name
-  = f.button :submit
+  = f.button :submit, t('forms.save')
