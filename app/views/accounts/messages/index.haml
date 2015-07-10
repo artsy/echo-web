@@ -1,4 +1,6 @@
-= link_to 'New', new_account_message_path(@account)
+= render partial: '/accounts/section_nav', locals: { account: @account }
+
+= link_to t('actions.new'), new_account_message_path(@account)
 
 %ul
   - @messages.each do |message|

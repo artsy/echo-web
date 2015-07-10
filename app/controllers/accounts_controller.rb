@@ -11,7 +11,7 @@ class AccountsController < ApplicationController
 
   def create
     @account = Account.create params[:account]
-    redirect_to account_path @account
+    redirect_to account_path(@account), notice: t('flash.notice.success.create', class_name: 'Account')
   end
 
   def show
@@ -22,12 +22,12 @@ class AccountsController < ApplicationController
 
   def update
     @account = @account.save params[:account]
-    redirect_to account_path id: @account.id
+    redirect_to account_path(id: @account.id), notice: t('flash.notice.success.update', class_name: 'Account')
   end
 
   def destroy
     @account.destroy
-    redirect_to accounts_path
+    redirect_to accounts_path, notice: t('flash.notice.success.delete', class_name: 'Account')
   end
 
   private

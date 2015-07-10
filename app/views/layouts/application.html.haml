@@ -1,0 +1,19 @@
+!!!
+%html{ lang: 'en' }
+  %head
+    %meta{ charset: 'utf-8' }
+    %meta{ http_equiv: 'X-UA-Compatible', content: 'IE=edge' }
+    %title= content_for?(:application_title) ? yield(:application_title) : 'Echo'
+    %meta{ name: 'description', content: '' }
+    %meta{ name: 'author', content: '' }
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+    = render partial: 'layouts/head'
+    = csrf_meta_tag
+
+  %body{ class: "#{controller.controller_name}_#{controller.action_name}" }
+    %header.navigation
+      = render partial: 'layouts/nav'
+    %section#main
+      = render partial: 'layouts/title'
+      = render partial: 'layouts/flash'
+      = yield

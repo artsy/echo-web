@@ -1,3 +1,5 @@
-%h2= @route.name
-= link_to 'Edit', edit_account_route_path(@account, @route)
-= link_to 'Delete', account_route_path(@account, @route), method: :delete, data: { confirm: "Are you sure?" }
+= render partial: '/accounts/section_nav', locals: { account: @account }
+
+= @route.name
+= link_to t('actions.edit'), edit_account_route_path(@account, @route)
+= link_to t('actions.delete'), account_route_path(@account, @route), method: :delete, data: { confirm: "Are you sure?" }

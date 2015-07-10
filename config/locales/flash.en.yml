@@ -1,0 +1,9 @@
+en:
+  flash:
+    notice:
+      success:
+        create: "%{class_name} was successfully created."
+        update: "%{class_name} was successfully updated."
+        delete: "%{class_name} was successfully deleted."
+    errors:
+      alert_message: " prohibited this %{class_name} from being saved:"

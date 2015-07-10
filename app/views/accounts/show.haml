@@ -1,6 +1,3 @@
-%h2= @account.name
-= link_to 'Features', account_features_path(@account)
-= link_to 'Messages', account_messages_path(@account)
-= link_to 'Routes', account_routes_path(@account)
-= link_to 'Edit', edit_account_path(id: @account.id)
-= link_to 'Delete', account_path(id: @account.id), method: :delete, data: { confirm: "Are you sure?" }
+= render partial: 'section_nav', locals: { account: @account }
+= link_to t('actions.edit'), edit_account_path(id: @account.id)
+= link_to t('actions.delete'), account_path(id: @account.id), method: :delete, data: { confirm: "Are you sure?" }
