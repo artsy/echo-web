@@ -1,0 +1,11 @@
+@import 'albers/base';
+
+section#main {
+  @include outer-container;
+  padding: $spacing-unit;
+}
+
+h2 {
+  @extend .single-padding-top;
+  font-size: 37px;
+}

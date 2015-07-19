@@ -13,6 +13,8 @@ gem 'braque'
 gem 'haml'
 gem 'simple_form'
 
+gem 'albers', git: 'https://github.com/dylanfareed/albers'
+
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'

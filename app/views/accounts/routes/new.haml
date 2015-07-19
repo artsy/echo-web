@@ -3,4 +3,4 @@
 = simple_form_for :route, url: account_routes_path(@account) do |f|
   = f.input :name, as: :string
   = f.input :path, as: :string
-  = f.button :submit, t('forms.save')
+  = f.button :submit, t('forms.save'), class: 'btn btn-primary btn-small'

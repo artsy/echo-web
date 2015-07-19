@@ -11,8 +11,7 @@
     = csrf_meta_tag
 
   %body{ class: "#{controller.controller_name}_#{controller.action_name}" }
-    %header.navigation
-      = render partial: 'layouts/nav'
+    = render partial: 'layouts/nav'
     %section#main
       = render partial: 'layouts/title'
       = render partial: 'layouts/flash'

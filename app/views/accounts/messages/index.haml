@@ -1,7 +1,24 @@
 = render partial: '/accounts/section_nav', locals: { account: @account }
 
-= link_to t('actions.new'), new_account_message_path(@account)
+.tab-actions
+  = link_to t('actions.new'), new_account_message_path(@account), class: 'btn btn-primary btn-tiny'
 
-%ul
+%table
+  %tr
+    %th Name
+    %th Content
+    %th
   - @messages.each do |message|
-    %li=link_to message.name, account_message_path(@account, message)
+    %tr
+      %td=link_to message.name, account_message_path(@account, message)
+      %td=link_to truncate(message.content), account_message_path(@account, message)
+      %td.actions
+        = link_to t('actions.edit'), edit_account_message_path(@account, message), class: 'btn btn-secondary btn-tiny'
+        = link_to t('actions.delete'), account_message_path(@account, message), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-delete btn-tiny'
+
+- if @messages.try(:next_link) || @messages.try(:previous_link)
+  .list-pager
+    - if @messages.try(:previous_link)
+      = link_to 'Previous', account_messages_path(@account, size: @size, page: @page - 1), class: 'list-pager-prev'
+    - if @messages.try(:next_link)
+      = link_to 'Next', account_messages_path(@account, size: @size, page: @page + 1), class: 'list-pager-next'

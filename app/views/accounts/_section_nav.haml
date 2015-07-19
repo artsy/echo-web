@@ -1,7 +1,8 @@
 - content_for :title do
   =link_to @account.name, account_path(@account)
 
-%ul
-  %li= link_to 'Features', account_features_path(account), class: (['features'].include? controller.controller_name) ? 'active' : ''
-  %li= link_to 'Messages', account_messages_path(account), class: (['messages'].include? controller.controller_name) ? 'active' : ''
-  %li= link_to 'Routes', account_routes_path(account), class: (['routes'].include? controller.controller_name) ? 'active' : ''
+%ul.tabs
+  %li= link_to 'Overview', account_path(account), class: (['accounts'].include? controller.controller_name) ? 'is-active' : ''
+  %li= link_to 'Features', account_features_path(account), class: (['features'].include? controller.controller_name) ? 'is-active' : ''
+  %li= link_to 'Messages', account_messages_path(account), class: (['messages'].include? controller.controller_name) ? 'is-active' : ''
+  %li= link_to 'Routes', account_routes_path(account), class: (['routes'].include? controller.controller_name) ? 'is-active' : ''

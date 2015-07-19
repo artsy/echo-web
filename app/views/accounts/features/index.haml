@@ -1,7 +1,24 @@
 = render partial: '/accounts/section_nav', locals: { account: @account }
 
-= link_to t('actions.new'), new_account_feature_path(@account)
+.tab-actions
+  = link_to t('actions.new'), new_account_feature_path(@account), class: 'btn btn-primary btn-tiny'
 
-%ul
+%table
+  %tr
+    %th Name
+    %th Value
+    %th
   - @features.each do |feature|
-    %li=link_to feature.name, account_feature_path(@account, feature)
+    %tr
+      %td=link_to feature.name, account_feature_path(@account, feature)
+      %td=link_to "#{feature.value}", account_feature_path(@account, feature)
+      %td.actions
+        = link_to t('actions.edit'), edit_account_feature_path(@account, feature), class: 'btn btn-secondary btn-tiny'
+        = link_to t('actions.delete'), account_feature_path(@account, feature), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-delete btn-tiny'
+
+- if @features.try(:next_link) || @features.try(:previous_link)
+  .list-pager
+    - if @features.try(:previous_link)
+      = link_to 'Previous', account_features_path(@account, size: @size, page: @page - 1), class: 'list-pager-prev'
+    - if @features.try(:next_link)
+      = link_to 'Next', account_features_path(@account, size: @size, page: @page + 1), class: 'list-pager-next'
