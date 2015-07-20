@@ -1,3 +1,3 @@
 = render partial: 'section_nav', locals: { account: @account }
-= link_to t('actions.edit'), edit_account_path(id: @account.id)
-= link_to t('actions.delete'), account_path(id: @account.id), method: :delete, data: { confirm: "Are you sure?" }
+= link_to t('actions.edit'), edit_account_path(id: @account.id), class: 'btn btn-secondary btn-small'
+= link_to t('actions.delete'), account_path(id: @account.id), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-delete btn-small'

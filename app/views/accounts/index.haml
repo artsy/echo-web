@@ -1,9 +1,15 @@
 - content_for :title do
   = t('.title')
 
-%p
-  = link_to t('actions.new'), new_account_path
+= link_to t('actions.new'), new_account_path, class: 'btn btn-primary btn-small'
 
-%ul
+%table
+  %tr
+    %th Name
+    %th
   - @accounts.each do |account|
-    %li=link_to account.name, account_path(account)
+    %tr
+      %td=link_to account.name, account_path(account)
+      %td.actions
+        = link_to t('actions.edit'), edit_account_path(account), class: 'btn btn-secondary btn-tiny'
+        = link_to t('actions.delete'), account_path(account), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-delete btn-tiny'

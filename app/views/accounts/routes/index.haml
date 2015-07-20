@@ -1,7 +1,24 @@
 = render partial: '/accounts/section_nav', locals: { account: @account }
 
-= link_to t('actions.new'), new_account_route_path(@account)
+.tab-actions
+  = link_to t('actions.new'), new_account_route_path(@account), class: 'btn btn-primary btn-tiny'
 
-%ul
+%table
+  %tr
+    %th Name
+    %th Path
+    %th
   - @routes.each do |route|
-    %li=link_to route.name, account_route_path(@account, route)
+    %tr
+      %td=link_to route.name, account_route_path(@account, route)
+      %td=link_to truncate(route.path), account_route_path(@account, route)
+      %td.actions
+        = link_to t('actions.edit'), edit_account_route_path(@account, route), class: 'btn btn-secondary btn-tiny'
+        = link_to t('actions.delete'), account_route_path(@account, route), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-delete btn-tiny'
+
+- if @routes.try(:next_link) || @routes.try(:previous_link)
+  .list-pager
+    - if @routes.try(:previous_link)
+      = link_to 'Previous', account_routes_path(@account, size: @size, page: @page - 1), class: 'list-pager-prev'
+    - if @routes.try(:next_link)
+      = link_to 'Next', account_routes_path(@account, size: @size, page: @page + 1), class: 'list-pager-next'
