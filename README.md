@@ -7,7 +7,7 @@
 Meta
 ---
 
-* __State:__ production
+* __State:__ _retired_
 * __Production:__ [https://echo-web-production.herokuapp.com/](https://echo-web-production.herokuapp.com/) | [Heroku](https://dashboard.heroku.com/apps/echo-web-production/resources)
 * __Staging:__ [https://echo-web-staging.herokuapp.com/](https://echo-web-staging.herokuapp.com/) | [Heroku](https://dashboard.heroku.com/apps/echo-web-staging/resources)
 * __Github:__ [https://github.com/artsy/echo-web/](https://github.com/artsy/echo-web/)
